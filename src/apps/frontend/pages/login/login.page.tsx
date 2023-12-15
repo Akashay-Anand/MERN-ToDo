@@ -1,3 +1,4 @@
+import { Input } from 'baseui/input';
 import React, { useCallback, useState } from 'react';
 
 import { useDeps } from '../../contexts';
@@ -42,6 +43,15 @@ export default function Login(): React.ReactElement {
         value={password}
         type='password'
       />
+      <Input
+          startEnhancer="@"
+          id="username"
+          placeholder="UserName"
+          onChange={(e) => setUsername(e.target.value)}
+          value={username}
+          type="text"
+      /><br />
+
       <button type='button' onClick={login}>
         LOGIN
       </button>

@@ -1,5 +1,8 @@
+import { LightTheme, BaseProvider } from 'baseui'; // #bw
 import React, { useEffect } from 'react';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
+import { Client as Styletron } from 'styletron-engine-atomic'; // #bw
+import { Provider as StyletronProvider } from 'styletron-react'; // #bw
 
 import { Header, Footer } from './components';
 import { DepsProvider } from './contexts';
@@ -9,6 +12,8 @@ import { AccessService } from './services';
 import InspectLet from './vendor/inspectlet';
 
 import './app.global.scss';
+
+const engine = new Styletron(); // #bw
 
 export default function App(): React.ReactElement {
   useEffect(() => {
@@ -20,6 +25,8 @@ export default function App(): React.ReactElement {
   }, []);
 
   return (
+    <StyletronProvider value={engine}>
+      <BaseProvider theme={LightTheme}>
     <DepsProvider deps={{
       accessService: new AccessService(),
     }}>
@@ -35,5 +42,7 @@ export default function App(): React.ReactElement {
         </div>
       </Router>
     </DepsProvider>
+      </BaseProvider>
+    </StyletronProvider>
   );
 }
